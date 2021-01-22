@@ -9,6 +9,10 @@ npm install
 ```
 npm run serve
 ```
+### Run server api
+```
+npm run api
+```
 
 ### Compiles and minifies for production
 ```
