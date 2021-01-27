@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="container">
+    <FormComponent />
   </div>
 </template>
+
+<script>
+  import FormComponent from '@/components/FormComponent.vue'
+  export default {
+    components: {
+      FormComponent
+    }
+  };
+</script>
+
+<style lang="less" scoped></style>
