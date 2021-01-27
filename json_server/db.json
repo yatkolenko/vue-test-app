@@ -285,7 +285,7 @@
       "savings": "$182",
       "oldPrice": "$791",
       "price": "$189",
-      "isFav": false,
+      "isFav": true,
       "id": "5a3964f253418b70bd4b87ff"
     },
     {
@@ -297,7 +297,7 @@
       "savings": "$108",
       "oldPrice": "$562",
       "price": "$215",
-      "isFav": false,
+      "isFav": true,
       "id": "5a3964f2780af43b9a05466c"
     },
     {

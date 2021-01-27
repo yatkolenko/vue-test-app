@@ -31,7 +31,7 @@ export default {
     return {
       loading: true,
 
-      currentPage: 1,
+      currentPage: 10,
       pageSize: 6
     };
   },

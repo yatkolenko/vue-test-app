@@ -33,8 +33,6 @@ export default {
     },
     [PRODUCT_CHANGE_REQUEST]: async (ctx, data) => {
       const ID = data.id;
-      console.log({ ...data });
-      console.log(data.id);
       try {
         await axios.put(`/products/${ID}`, {
           ...data
