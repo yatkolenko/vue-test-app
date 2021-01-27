@@ -2,12 +2,18 @@
   <header class="header">
     <div class="container">
       <h1>Vue App Header</h1>
+      <Nav />
     </div>
   </header>
 </template>
 
 <script>
-export default {};
+  import Nav from "./Nav.vue";
+  export default {
+    components: {
+      Nav
+    }
+  };
 </script>
 
 <style lang="less" scoped>

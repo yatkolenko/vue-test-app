@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" v-loading="loading">
     <ProductsHead :totalProducts="productsList.length" />
-    <ProductsList v-loading="loading" :productsList="productsList" />
+    <ProductsList :productsList="productsList" />
     <ProductsPagination
       :propCurrentPage="currentPage"
       :propPageSize="pageSize"
@@ -52,9 +52,7 @@ export default {
       try {
         await this.PRODUCTS_REQUEST(params);
       } finally {
-        setTimeout(() => {
-          this.loading = false;
-        }, 350);
+        this.loading = false;
       }
     }
   },
@@ -68,6 +66,9 @@ export default {
   },
   beforeMount() {
     this.getProducts();
-  }
+  },
+  beforeUnmount() {
+    this.$store.commit('RESET_PRODUCTS');
+  },
 };
 </script>
