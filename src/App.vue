@@ -1,7 +1,20 @@
 <template>
-  <router-view />
+  <Header />
+  <main>
+    <router-view />
+  </main>
+  <Footer />
 </template>
 
-<style lang="less">
+<script>
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
+</script>
 
-</style>
+<style lang="less"></style>
