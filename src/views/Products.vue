@@ -1,7 +1,7 @@
 <template>
-  <div class="container" v-loading="loading">
-    <ProductsHead :totalProducts="productsList.length" />
-    <ProductsList :productsList="productsList" />
+  <div class="container">
+    <ProductsHead @onSortChange="onSortChange" :totalProducts="productsList.length" />
+    <ProductsList v-loading="loading" :productsList="productsList" />
     <ProductsPagination
       :propCurrentPage="currentPage"
       :propPageSize="pageSize"
@@ -31,8 +31,13 @@ export default {
     return {
       loading: true,
 
-      currentPage: 10,
-      pageSize: 6
+      currentPage: 1,
+      pageSize: 6,
+
+      sorting: {
+        order: "",
+        type: ""
+      }
     };
   },
   computed: {
@@ -47,14 +52,21 @@ export default {
       this.loading = true;
       const params = {
         page: this.currentPage,
-        size: this.pageSize
+        size: this.pageSize,
+        sorting: {...this.sorting}
       };
       try {
         await this.PRODUCTS_REQUEST(params);
       } finally {
         this.loading = false;
       }
-    }
+    },
+    onSortChange(val) {
+      this.sorting = {
+        order: val.order,
+        type: val.type
+      }
+    },
   },
   watch: {
     currentPage() {
@@ -62,13 +74,16 @@ export default {
     },
     pageSize() {
       this.getProducts();
+    },
+    sorting: {
+      deep: true,
+      handler() {
+        this.getProducts();
+      }
     }
   },
   beforeMount() {
     this.getProducts();
-  },
-  beforeUnmount() {
-    this.$store.commit('RESET_PRODUCTS');
-  },
+  }
 };
 </script>

@@ -19,20 +19,17 @@ export default {
       state.products = payload.data;
       state.productsTotalCount = +payload.headers["x-total-count"];
     },
-    RESET_PRODUCTS: (state) => {
-      console.log("state:", state);
-      state = { ...getDefaultState() };
-    },
     MUTATE_LIST_STYLE: (state, payload) => {
       state.inlineList = payload;
     },
   },
   actions: {
     [PRODUCTS_REQUEST]: async (ctx, params) => {
-      const { page, size } = params;
+      console.log('params:', params);
+      const { page, size, sorting } = params;
       try {
         const response = await axios.get(
-          `/products?_page=${page}&_limit=${size}`
+          `/products?_page=${page}&_limit=${size}&_sort=${sorting.type}&_order=${sorting.order}`
         );
         ctx.commit(PRODUCTS_REQUEST, response);
       } catch (e) {

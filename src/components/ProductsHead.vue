@@ -1,24 +1,33 @@
 <template>
   <div class="prodcuts-head">
     <div class="products-count">{{ totalProducts }} results</div>
-    <div class="controls-holder">
-      <el-button
-        type="primary"
-        @click="inlineList = !inlineList"
-        :icon="inlineList ? 'el-icon-tickets' : 'el-icon-s-grid'"
-      />
-      <div class="select-box">
-        <el-select v-model="value" placeholder="Sort by">
+    <el-form :inline="true">
+
+      <el-form-item label="Sorting:">
+        <el-select
+          @change="onSortChange"
+          v-model="value"
+          placeholder="Sort by"
+        >
           <el-option
-            v-for="item in options"
-            :key="item.value"
+            v-for="(item, k) in options"
+            :key="k"
             :label="item.label"
             :value="item.value"
           >
           </el-option>
         </el-select>
-      </div>
-    </div>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button
+          type="primary"
+          @click="inlineList = !inlineList"
+          :icon="inlineList ? 'el-icon-tickets' : 'el-icon-s-grid'"
+        />
+      </el-form-item>
+
+    </el-form>
   </div>
 </template>
 
@@ -26,35 +35,45 @@
 export default {
   props: {
     totalProducts: {
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       options: [
         {
-          value: "Option1",
-          label: "Option1"
+          value: "",
+          label: "Default",
         },
         {
-          value: "Option2",
-          label: "Option2"
+          value: "price,asc",
+          label: "Price asc",
         },
         {
-          value: "Option3",
-          label: "Option3"
+          value: "price,desc",
+          label: "Price desc",
         },
         {
-          value: "Option4",
-          label: "Option4"
+          value: "name,asc",
+          label: "Name asc",
         },
         {
-          value: "Option5",
-          label: "Option5"
-        }
+          value: "name,desc",
+          label: "Name desc",
+        },
       ],
-      value: "Option1"
+      value: "",
     };
+  },
+  methods: {
+    onSortChange(val) {
+      const value = val.split(",");
+      const data = {
+        type: value[0] ? value[0] : "",
+        order: value[1] ? value[1] : "",
+      };
+      this.$emit("onSortChange", data);
+    }
   },
   computed: {
     inlineList: {
@@ -63,9 +82,9 @@ export default {
       },
       set(val) {
         this.$store.commit("MUTATE_LIST_STYLE", val);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 
@@ -75,20 +94,12 @@ export default {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin: 0 0 19px;
+  margin: 0 0 10px;
 }
 .products-count {
   display: block;
   font-weight: bold;
   font-size: 21px;
   padding: 5px 0;
-}
-.controls-holder {
-  display: flex;
-  align-items: center;
-  padding: 5px 0;
-}
-.select-box {
-  padding-left: 15px;
 }
 </style>
