@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <ProductsHead @onSortChange="onSortChange" :totalProducts="productsList.length" />
+    <ProductsHead
+      @onSortChange="onSortChange"
+      :totalProducts="productsList.length"
+    />
     <ProductsList v-loading="loading" :productsList="productsList" />
     <ProductsPagination
       :propCurrentPage="currentPage"
@@ -53,7 +56,7 @@ export default {
       const params = {
         page: this.currentPage,
         size: this.pageSize,
-        sorting: {...this.sorting}
+        sorting: { ...this.sorting }
       };
       try {
         await this.PRODUCTS_REQUEST(params);
@@ -65,8 +68,8 @@ export default {
       this.sorting = {
         order: val.order,
         type: val.type
-      }
-    },
+      };
+    }
   },
   watch: {
     currentPage() {

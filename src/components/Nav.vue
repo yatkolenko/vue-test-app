@@ -16,22 +16,20 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="less" scoped>
-  .nav-list {
-    padding: 15px 0 0;
-    margin: 0;
-    list-style: none;
-    li {
-      display: inline-block;
-      padding-right: 3px;
-    }
-    .router-link-active {
-      color: red;
-    }
+.nav-list {
+  padding: 15px 0 0;
+  margin: 0;
+  list-style: none;
+  li {
+    display: inline-block;
+    padding-right: 3px;
   }
+  .router-link-active {
+    color: red;
+  }
+}
 </style>

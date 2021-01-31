@@ -8,12 +8,12 @@
 </template>
 
 <script>
-  import Nav from "./Nav.vue";
-  export default {
-    components: {
-      Nav
-    }
-  };
+import Nav from "./Nav.vue";
+export default {
+  components: {
+    Nav
+  }
+};
 </script>
 
 <style lang="less" scoped>

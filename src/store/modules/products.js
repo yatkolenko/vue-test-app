@@ -1,6 +1,6 @@
 import {
   PRODUCTS_REQUEST,
-  PRODUCT_CHANGE_REQUEST,
+  PRODUCT_CHANGE_REQUEST
 } from "../actions/products.js";
 import axios from "axios";
 
@@ -8,7 +8,7 @@ const getDefaultState = () => {
   return {
     products: [],
     productsTotalCount: 0,
-    inlineList: false,
+    inlineList: false
   };
 };
 
@@ -21,11 +21,11 @@ export default {
     },
     MUTATE_LIST_STYLE: (state, payload) => {
       state.inlineList = payload;
-    },
+    }
   },
   actions: {
     [PRODUCTS_REQUEST]: async (ctx, params) => {
-      console.log('params:', params);
+      console.log("params:", params);
       const { page, size, sorting } = params;
       try {
         const response = await axios.get(
@@ -40,16 +40,16 @@ export default {
       const ID = data.id;
       try {
         await axios.put(`/products/${ID}`, {
-          ...data,
+          ...data
         });
       } catch (e) {
         console.log(e);
       }
-    },
+    }
   },
   getters: {
-    getProducts: (state) => state.products,
-    getProductsTotalCount: (state) => state.productsTotalCount,
-    getInlineList: (state) => state.inlineList,
-  },
+    getProducts: state => state.products,
+    getProductsTotalCount: state => state.productsTotalCount,
+    getInlineList: state => state.inlineList
+  }
 };
